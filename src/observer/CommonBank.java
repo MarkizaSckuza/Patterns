@@ -18,10 +18,12 @@ public class CommonBank implements Observer {
     }
 
     @Override
-    public void update(float dollarExchangeRate) {
-        this.dollarExchangeRate = dollarExchangeRate;
-        countAmount();
-        showInfo();
+    public void update(Subject subject) {
+        if (subject instanceof NationalBank) {
+            dollarExchangeRate = ((NationalBank) subject).getDollarExchangeRate();
+            countAmount();
+            showInfo();
+        }
     }
 
     private void countAmount(){

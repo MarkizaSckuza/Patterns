@@ -14,5 +14,9 @@ public class Test {
 
         nationalBank.setDollarExchangeRate(5.3f);
         nationalBank.setDollarExchangeRate(11.7f);
+
+        nationalBank.removeObserver(commonBank2);
+
+        nationalBank.setDollarExchangeRate(11.3f);
     }
 }

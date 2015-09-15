@@ -31,12 +31,16 @@ public class NationalBank implements Subject {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update(dollarExchangeRate);
+            observers.get(i).update(this);
         }
     }
 
     public void setDollarExchangeRate(float dollarExchangeRate) {
         this.dollarExchangeRate = dollarExchangeRate;
         notifyObservers();
+    }
+
+    public float getDollarExchangeRate() {
+        return dollarExchangeRate;
     }
 }

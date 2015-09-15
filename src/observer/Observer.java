@@ -5,5 +5,5 @@ package observer;
  */
 public interface Observer {
 
-    public void update(float dollarExchangeRate);
+    public void update(Subject subject);
 }
