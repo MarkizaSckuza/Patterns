@@ -12,10 +12,12 @@ public class VectorCollection<E extends Vector> implements Collection<E> {
 
     private E[] elements;
     private int size;
+    private int emptyCells;
 
     public VectorCollection() {
         this.elements = (E[]) new Vector[10];
         size = 0;
+        emptyCells = elements.length;
     }
 
     @Override
@@ -59,19 +61,18 @@ public class VectorCollection<E extends Vector> implements Collection<E> {
 
     @Override
     public boolean add(E e) {
-        int i = getCountEmptyCells();
-        if (i != 0) {
-            this.elements[elements.length - i - 1] = e;
+        if (size != elements.length) {
+            this.elements[elements.length - (elements.length - size)] = e;
             size++;
+            emptyCells--;
             return true;
         }
-        E[] array = (E[]) new Vector[elements.length];
+        E[] array = (E[]) new Vector[elements.length * 2];
         System.arraycopy(elements, 0, array, 0, size);
-        array[array.length - 1] = e;
+        array[size] = e;
         this.elements = array;
-        size = elements.length;
+        this.size++;
         return true;
-
     }
 
     @Override
@@ -131,17 +132,5 @@ public class VectorCollection<E extends Vector> implements Collection<E> {
     @Override
     public void clear() {
         this.elements = (E[]) new Vector[10];
-    }
-
-    private int getCountEmptyCells() {
-        int count = 0;
-        if (this.elements[elements.length - 1] != null)
-            return count;
-        int i = this.elements.length - 1;
-        while (i >= 0 && this.elements[i] == null) {
-            count++;
-            i--;
-        }
-        return count;
     }
 }
